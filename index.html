@@ -1,6 +1,24 @@
 <html>
 	<head></head>
-	<body>
+	<body ng-app="gfm_app" ng-controller="AppCtrl">
 		artem
+
+		<div ng-repeat="venue in suggestions.data" ng-cloak="">
+			{{ venue.name }}
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.11/angular-ui-router.min.js"></script>
+
+		<script src="_app.js"></script>
+		<!-- controllers -->
+		<script src="controllers/app_controller.js"></script>
+
+		<!-- models -->
+		<script src="models/suggestions_model.js"></script>
+		<script src="models/suggestions_data.js"></script>
+
+		<!-- services -->
+		<script src="services/user_service.js"></script>
 	</body>
 </html>
