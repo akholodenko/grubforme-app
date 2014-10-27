@@ -1,14 +1,22 @@
 <html>
-	<head></head>
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="libraries/css/angular-material.docs.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+	</head>
 	<body ng-app="gfm_app" ng-controller="AppCtrl">
-		artem
+		<md-progress-circular mode="indeterminate" ng-hide="suggestions.data.length"></md-progress-circular>
 
-		<div ng-repeat="venue in suggestions.data" ng-cloak="">
+		<div ng-repeat="venue in suggestions.data" ng-cloak ng-show="suggestions.data.length">
 			{{ venue.name }}
 		</div>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.11/angular-ui-router.min.js"></script>
+
+		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.11/angular-ui-router.min.js"></script>-->
+		<script src="http://code.angularjs.org/1.3.0/angular-aria.min.js"></script>
+		<script src="http://code.angularjs.org/1.3.0/angular-animate.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/hammer.js/1.1.3/hammer.min.js"></script>
+		<script src="libraries/js/angular-material.min.js"></script>
 
 		<script src="_app.js"></script>
 		<!-- controllers -->
@@ -20,5 +28,6 @@
 
 		<!-- services -->
 		<script src="services/user_service.js"></script>
+		<script src="services/location_service.js"></script>
 	</body>
 </html>

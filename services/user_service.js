@@ -1,38 +1,26 @@
-gfm_app.factory('userService', ['$rootScope',
-	function ($rootScope) {
+gfm_app.factory('userService', ['$rootScope', 'locationService',
+	function ($rootScope, locationService) {
 		return  {
 			location: null,
 			travel_distance: 8000,//var radius = (App.user.settings.is_driving) ? '8000' : '1250';
 			set_location: function () {
-				var that = this;
-				if (navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition(function(position){
-						$rootScope.$apply(function(){
-							that.location = position.coords;
+				var location_from_storage = locationService.get_location_from_storage();
 
+				// if current location was set less than 5 min ago, use it
+				if(location_from_storage !== null && (Date.now() - location_from_storage.created_at) <= 300000) {
+					console.log('use location from storage');
+					this.location = location_from_storage.location;
+					$rootScope.$broadcast('user_location_set');
+				}
+				else {
+					console.log('use location from GPS');
+					var that = this;
+					locationService.get_location_from_gps(function(position) {
+						$rootScope.$apply(function () {
+							that.location = position.coords;
+							locationService.save_location(that.location);
 							$rootScope.$broadcast('user_location_set');
 						});
-					}, function (error) {
-						var error_message = '';
-						switch(error.code)
-						{
-							case error.PERMISSION_DENIED:
-								error_message = "We were not allowed to identify your location."
-								break;
-							case error.POSITION_UNAVAILABLE:
-								error_message = "We had a problem identifying your location."
-								break;
-							case error.TIMEOUT:
-								error_message = "We had a problem identifying your location."
-								break;
-							case error.UNKNOWN_ERROR:
-								error_message = "We had a problem identifying your location."
-								break;
-						}
-
-						console.log(error_message);
-
-						$rootScope.$broadcast('user_location_set_error', {'message' : error_message});
 					});
 				}
 			}
