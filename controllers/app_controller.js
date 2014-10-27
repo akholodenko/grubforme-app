@@ -3,6 +3,7 @@ gfm_app.controller('AppCtrl', ['$scope', 'suggestionsModel', 'userService',
 		$scope.user = userService;
 		$scope.suggestions = suggestionsModel;
 		$scope.current_suggestion = null;
+		$scope.current_suggestion_index = 0;
 
 		$scope.constructor = function () {
 			$scope.user.set_location();
@@ -19,7 +20,16 @@ gfm_app.controller('AppCtrl', ['$scope', 'suggestionsModel', 'userService',
 		}, true);
 
 		$scope.show_next = function () {
-			$scope.swiped = true;
+			console.log('show next');
+
+			if($scope.suggestions.data.length <= $scope.current_suggestion_index + 1) {
+				$scope.current_suggestion_index = 0;
+			}
+			else {
+				$scope.current_suggestion_index++;
+			}
+
+			$scope.current_suggestion = $scope.suggestions.data[$scope.current_suggestion_index];
 		}
 
 		$scope.constructor();
