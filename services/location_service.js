@@ -6,7 +6,7 @@ gfm_app.factory('locationService', ['$rootScope',
 				if(typeof(Storage) !== "undefined") {
 					localStorage.setItem(this.location_key, JSON.stringify({
 						created_at: Date.now(),
-						location: location
+						location: { latitude: location.latitude, longitude: location.longitude }
 					}));
 
 					return true;

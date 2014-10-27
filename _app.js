@@ -1,4 +1,4 @@
-var gfm_app = angular.module('gfm_app', ['ngMaterial']);
+var gfm_app = angular.module('gfm_app', ['ngMaterial', 'ngTouch']);
 
 gfm_app.constant('API_URL', {
 	appfog: 'http://grubformeapi.aws.af.cm'

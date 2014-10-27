@@ -2,6 +2,7 @@ gfm_app.controller('AppCtrl', ['$scope', 'suggestionsModel', 'userService',
 	function($scope, suggestionsModel, userService) {
 		$scope.user = userService;
 		$scope.suggestions = suggestionsModel;
+		$scope.current_suggestion = null;
 
 		$scope.constructor = function () {
 			$scope.user.set_location();
@@ -10,6 +11,16 @@ gfm_app.controller('AppCtrl', ['$scope', 'suggestionsModel', 'userService',
 		$scope.$on('user_location_set', function () {
 			$scope.suggestions.set();
 		});
+
+		$scope.$watch('suggestions.data', function(old_value, new_value) {
+			if(new_value == old_value) return;
+
+			$scope.current_suggestion = $scope.suggestions.data[0];
+		}, true);
+
+		$scope.show_next = function () {
+			$scope.swiped = true;
+		}
 
 		$scope.constructor();
 	}

@@ -7,7 +7,8 @@ gfm_app.factory('userService', ['$rootScope', 'locationService',
 				var location_from_storage = locationService.get_location_from_storage();
 
 				// if current location was set less than 5 min ago, use it
-				if(location_from_storage !== null && (Date.now() - location_from_storage.created_at) <= 300000) {
+				if(location_from_storage !== null && (Date.now() - location_from_storage.created_at) <= 300000 &&
+					location_from_storage.location.latitude !== undefined) {
 					console.log('use location from storage');
 					this.location = location_from_storage.location;
 					$rootScope.$broadcast('user_location_set');
