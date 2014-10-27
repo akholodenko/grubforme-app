@@ -32,6 +32,19 @@ gfm_app.controller('AppCtrl', ['$scope', 'suggestionsModel', 'userService',
 			$scope.current_suggestion = $scope.suggestions.data[$scope.current_suggestion_index];
 		}
 
+		$scope.show_prev = function () {
+			console.log('show prev');
+
+			if($scope.current_suggestion_index == 0) {
+				$scope.current_suggestion_index = $scope.suggestions.data.length - 1;
+			}
+			else {
+				$scope.current_suggestion_index--;
+			}
+
+			$scope.current_suggestion = $scope.suggestions.data[$scope.current_suggestion_index];
+		}
+
 		$scope.constructor();
 	}
 ]);
