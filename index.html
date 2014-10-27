@@ -21,9 +21,15 @@
 
 			<md-content class="md-content-padding">
 				<div class="venue" ng-cloak>
-					<div layout="horizontal" layout-padding layout-align="space-between">
-						<div flex>{{ current_suggestion.name }}</div>
-						<div><img ng-src="{{ current_suggestion.image_url}}" /></div>
+					<div layout="horizontal" layout-align="space-between">
+						<div flex layout="vertical" layout-padding>
+							<div flex class="venue-name">{{ current_suggestion.name }}</div>
+							<div flex layout="horizontal" class="venue-reviews-summary">
+								<div class="venue-reviews-summary-rating"><img ng-src="{{ current_suggestion.rating_img_url }}" /></div>
+								<div flex class="venue-reviews-summary-count">{{ current_suggestion.review_count }}</div>
+							</div>
+						</div>
+						<div class="venue-thumbnail"><img ng-src="{{ current_suggestion.image_url}}" /></div>
 					</div>
 				</div>
 			</md-content>

@@ -7,3 +7,20 @@
 
 	margin: auto;
 }
+
+.venue {
+
+}
+
+.venue-name {
+	font-size: 25px;
+}
+
+.venue-thumbnail {
+	padding: 8px;
+}
+
+.venue-reviews-summary-count {
+	margin-left: 10px;
+	margin-top: -2px;
+}
