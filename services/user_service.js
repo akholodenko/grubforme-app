@@ -2,7 +2,7 @@ gfm_app.factory('userService', ['$rootScope', 'locationService',
 	function ($rootScope, locationService) {
 		return  {
 			location: null,
-			travel_distance: 8000,//var radius = (App.user.settings.is_driving) ? '8000' : '1250';
+			travel_distance: 1250,//var radius = (App.user.settings.is_driving) ? '8000' : '1250';
 			set_location: function () {
 				var location_from_storage = locationService.get_location_from_storage();
 

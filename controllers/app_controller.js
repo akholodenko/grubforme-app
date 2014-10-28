@@ -1,9 +1,10 @@
-gfm_app.controller('AppCtrl', ['$scope', 'suggestionsModel', 'userService',
-	function($scope, suggestionsModel, userService) {
+gfm_app.controller('AppCtrl', ['$scope', '$timeout', 'suggestionsModel', 'userService',
+	function($scope, $timeout, suggestionsModel, userService) {
 		$scope.user = userService;
 		$scope.suggestions = suggestionsModel;
 		$scope.current_suggestion = null;
 		$scope.current_suggestion_index = 0;
+		$scope.show_swipe_tip = false;
 
 		$scope.constructor = function () {
 			$scope.user.set_location();
@@ -17,6 +18,12 @@ gfm_app.controller('AppCtrl', ['$scope', 'suggestionsModel', 'userService',
 			if(new_value == old_value) return;
 
 			$scope.current_suggestion = $scope.suggestions.data[0];
+
+			// show / hide-delay swipe tooltip
+			$scope.show_swipe_tip = true;
+			$timeout(function () {
+				$scope.show_swipe_tip = false;
+			}, 3000);
 		}, true);
 
 		$scope.show_next = function () {
@@ -43,6 +50,22 @@ gfm_app.controller('AppCtrl', ['$scope', 'suggestionsModel', 'userService',
 			}
 
 			$scope.current_suggestion = $scope.suggestions.data[$scope.current_suggestion_index];
+		}
+
+		$scope.vecinity = function () {
+			if($scope.current_suggestion == null) {
+				return "";
+			}
+			else {
+				var distance = $scope.current_suggestion.distance;
+
+				if (distance <= 500)
+					return 'close by';
+				else if (distance <= 1000)
+					return 'a stroll away';
+				else
+					return 'a shlep away';
+			}
 		}
 
 		$scope.constructor();

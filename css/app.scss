@@ -1,0 +1,58 @@
+@import "mixins/utils.scss";
+
+.loading-spinner {
+	@include utils-position-center;
+}
+
+.swipe-overlay {
+	@include utils-position-bottom(100px);
+	@include utils-opacity(0.5);
+
+	-webkit-transition:all linear 0.5s;
+	transition:all linear 0.5s;
+	z-index: 1001;
+
+	width: 100px;
+	height: 100px;
+
+	&.animate-hide.ng-hide {
+		@include utils-opacity(0);
+	}
+}
+
+.venue {
+	.venue-name {
+		font-size: 25px;
+	}
+
+	.venue-thumbnail {
+		padding: 8px;
+	}
+
+	.venue-reviews-summary-count {
+		margin-left: 10px;
+		margin-top: -2px;
+	}
+
+	.venue-details {
+		margin-top: 16px;
+
+		.venue-vicinity, .venue-details-address, .venue-details-categories {
+			padding: 16px;
+		}
+	}
+}
+
+
+.venue-profile-button {
+	position: absolute;
+	bottom: 0px;
+	display: block;
+	width: 100%;
+	padding: 16px;
+
+	md-button {
+		width: 100%;
+		height: 50px;
+	}
+}

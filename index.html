@@ -2,7 +2,7 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<link rel="stylesheet" type="text/css" href="libraries/css/angular-material.docs.css">
-		<link rel="stylesheet" type="text/css" href="css/_app.css">
+		<link rel="stylesheet" type="text/css" href="css/app.css">
 
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
 	</head>
@@ -18,9 +18,10 @@
 			</md-toolbar>
 
 			<md-progress-circular mode="indeterminate" ng-hide="suggestions.data.length" class="loading-spinner"></md-progress-circular>
+			<img ng-show="show_swipe_tip" class="swipe-overlay animate-hide" src="images/icon-swipe.png" />
 
-			<md-content class="md-content-padding">
-				<div class="venue" ng-cloak>
+			<md-content class="md-content-padding" ng-show="current_suggestion">
+				<div class="venue" ng-cloak  layout="vertical">
 					<div layout="horizontal" layout-align="space-between">
 						<div flex layout="vertical" layout-padding>
 							<div flex class="venue-name">{{ current_suggestion.name }}</div>
@@ -31,11 +32,24 @@
 						</div>
 						<div class="venue-thumbnail"><img ng-src="{{ current_suggestion.image_url}}" /></div>
 					</div>
+
+					<md-whiteframe flex class="venue-details md-whiteframe-z1" layout="vertical" layout-align="top left">
+						<div class="venue-vicinity">{{ vecinity() }}</div>
+						<md-divider></md-divider>
+						<div class="venue-details-address">
+							<div ng-repeat="address in current_suggestion.location.display_address">{{ address }}</div>
+						</div>
+						<md-divider></md-divider>
+						<div class="venue-details-categories">
+							<div ng-repeat="category in current_suggestion.categories">{{ category[0] }}</div>
+						</div>
+					</md-whiteframe>
 				</div>
 			</md-content>
-			<!--<div ng-repeat="venue in suggestions.data" ng-cloak ng-show="suggestions.data.length">
-				{{ venue.name }}
-			</div>-->
+
+			<a ng-href="{{ current_suggestion.mobile_url }}" target="_blank" class="venue-profile-button" ng-show="current_suggestion">
+				<md-button aria-label class="md-button-raised md-theme-green">view profile</md-button>
+			</a>
 		</div>
 
 
@@ -46,7 +60,7 @@
 		<script src="http://code.angularjs.org/1.3.0/angular-aria.min.js"></script>
 		<script src="http://code.angularjs.org/1.3.0/angular-animate.min.js"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/hammer.js/1.1.3/hammer.min.js"></script>
-		<script src="libraries/js/angular-material.min.js"></script>
+		<script src="libraries/js/angular-material.docs.js"></script>
 
 		<script src="_app.js"></script>
 		<!-- controllers -->
