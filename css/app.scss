@@ -21,8 +21,8 @@
 }
 
 ul[rn-carousel]>li {
-	padding-left: 24px;
-	padding-right: 24px;
+	padding-left: 8px;
+	padding-right: 8px;
 }
 
 .suggestions-container {
@@ -30,6 +30,8 @@ ul[rn-carousel]>li {
 	height: 100%;
 
 	.venue {
+		margin-top: 8px;
+
 		.venue-name {
 			font-size: 20px;
 			padding-right: 8px;
@@ -61,7 +63,7 @@ ul[rn-carousel]>li {
 	bottom: 0px;
 	display: block;
 	width: 100%;
-	padding: 24px 32px;
+	padding: 16px;
 
 	md-button {
 		width: 100%;
