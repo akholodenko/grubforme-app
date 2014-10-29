@@ -2,11 +2,12 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<link rel="stylesheet" type="text/css" href="libraries/css/angular-material.docs.css">
+		<link rel="stylesheet" type="text/css" href="libraries/css/angular-carousel.min.css">
 		<link rel="stylesheet" type="text/css" href="css/app.css">
 
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
 	</head>
-	<body ng-app="gfm_app" ng-controller="AppCtrl" ng-swipe-right="show_prev()" ng-swipe-left="show_next()">
+	<body ng-app="gfm_app" ng-controller="AppCtrl">
 		<div layout="vertical" layout-fill>
 			<md-toolbar class="md-theme-light">
 				<div class="md-toolbar-tools">
@@ -20,36 +21,42 @@
 			<md-progress-circular mode="indeterminate" ng-hide="suggestions.data.length" class="loading-spinner"></md-progress-circular>
 			<img ng-show="show_swipe_tip" class="swipe-overlay animate-hide" src="images/icon-swipe.png" />
 
-			<md-content class="md-content-padding" ng-show="current_suggestion">
-				<div class="venue" ng-cloak  layout="vertical">
-					<div layout="horizontal" layout-align="space-between">
-						<div flex layout="vertical" layout-padding>
-							<div flex class="venue-name">{{ current_suggestion.name }}</div>
-							<div flex layout="horizontal" class="venue-reviews-summary">
-								<div class="venue-reviews-summary-rating"><img ng-src="{{ current_suggestion.rating_img_url }}" /></div>
-								<div flex class="venue-reviews-summary-count">{{ current_suggestion.review_count }}</div>
+			<ul rn-carousel class="suggestions-container">
+				<li ng-repeat="current_suggestion in suggestions.data">
+					<md-content class="md-content-padding" ng-show="suggestions.data.length">
+
+						<div class="venue" ng-cloak  layout="vertical">
+							<div layout="horizontal" layout-align="space-between">
+								<div flex layout="vertical">
+									<div flex class="venue-name">{{ current_suggestion.name }}</div>
+									<div layout="horizontal" class="venue-reviews-summary">
+										<div class="venue-reviews-summary-rating"><img ng-src="{{ current_suggestion.rating_img_url }}" /></div>
+										<div flex class="venue-reviews-summary-count">{{ current_suggestion.review_count }}</div>
+									</div>
+								</div>
+								<div class="venue-thumbnail"><img ng-src="{{ current_suggestion.image_url}}" /></div>
 							</div>
-						</div>
-						<div class="venue-thumbnail"><img ng-src="{{ current_suggestion.image_url}}" /></div>
-					</div>
 
-					<md-whiteframe flex class="venue-details md-whiteframe-z1" layout="vertical" layout-align="top left">
-						<div class="venue-vicinity">{{ vecinity() }}</div>
-						<md-divider></md-divider>
-						<div class="venue-details-address">
-							<div ng-repeat="address in current_suggestion.location.display_address">{{ address }}</div>
+							<md-whiteframe flex class="venue-details md-whiteframe-z1" layout="vertical" layout-align="top left">
+								<div class="venue-vicinity">{{ vecinity() }}</div>
+								<md-divider></md-divider>
+								<div class="venue-details-address">
+									<div ng-repeat="address in current_suggestion.location.display_address">{{ address }}</div>
+								</div>
+								<md-divider></md-divider>
+								<div class="venue-details-categories">
+									<div ng-repeat="category in current_suggestion.categories">{{ category[0] }}</div>
+								</div>
+							</md-whiteframe>
 						</div>
-						<md-divider></md-divider>
-						<div class="venue-details-categories">
-							<div ng-repeat="category in current_suggestion.categories">{{ category[0] }}</div>
-						</div>
-					</md-whiteframe>
-				</div>
-			</md-content>
 
-			<a ng-href="{{ current_suggestion.mobile_url }}" target="_blank" class="venue-profile-button" ng-show="current_suggestion">
-				<md-button aria-label class="md-button-raised md-theme-green">view profile</md-button>
-			</a>
+					</md-content>
+
+					<a ng-href="{{ current_suggestion.mobile_url }}" target="_blank" class="venue-profile-button" ng-show="current_suggestion">
+						<md-button aria-label class="md-button-raised md-theme-green">view profile</md-button>
+					</a>
+				</li>
+			</ul>
 		</div>
 
 
@@ -61,6 +68,8 @@
 		<script src="http://code.angularjs.org/1.3.0/angular-animate.min.js"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/hammer.js/1.1.3/hammer.min.js"></script>
 		<script src="libraries/js/angular-material.docs.js"></script>
+		<script src="libraries/js/angular-carousel.min.js"></script>
+		<!--http://ngmodules.org/modules/angular-carousel-->
 
 		<script src="_app.js"></script>
 		<!-- controllers -->

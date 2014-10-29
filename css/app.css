@@ -31,24 +31,31 @@
     -khtml-opacity: 0;
     opacity: 0; }
 
-.venue .venue-name {
-  font-size: 25px; }
-.venue .venue-thumbnail {
-  padding: 8px; }
-.venue .venue-reviews-summary-count {
-  margin-left: 10px;
-  margin-top: -2px; }
-.venue .venue-details {
-  margin-top: 16px; }
-  .venue .venue-details .venue-vicinity, .venue .venue-details .venue-details-address, .venue .venue-details .venue-details-categories {
-    padding: 16px; }
+ul[rn-carousel] > li {
+  padding-left: 24px;
+  padding-right: 24px; }
+
+.suggestions-container {
+  width: 100%;
+  height: 100%; }
+  .suggestions-container .venue .venue-name {
+    font-size: 20px;
+    padding-right: 8px; }
+  .suggestions-container .venue .venue-reviews-summary-count {
+    margin-left: 10px;
+    margin-top: -2px; }
+  .suggestions-container .venue .venue-details {
+    margin-top: 16px; }
+    .suggestions-container .venue .venue-details .venue-vicinity, .suggestions-container .venue .venue-details .venue-details-address, .suggestions-container .venue .venue-details .venue-details-categories {
+      padding: 16px; }
 
 .venue-profile-button {
   position: absolute;
+  left: 0px;
   bottom: 0px;
   display: block;
   width: 100%;
-  padding: 16px; }
+  padding: 24px 32px; }
   .venue-profile-button md-button {
     width: 100%;
     height: 50px; }
